@@ -1,0 +1,136 @@
+* {
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 15px;
+}
+
+
+window#waybar { 
+    background-color: #24273a; 
+    color: #ffffff;    
+}
+
+
+.modules-left {
+	background-color: #24273a;
+}
+
+
+.modules-right {
+	background-color: #24273a;
+	padding: 0px 0px 0px 0px;
+}
+
+#network {
+    color:#eed49f;
+}
+#custom-power {
+    color:#f5a97f;
+    background-color: #3e4454;
+    margin: 0px 2px 0px 2px;
+    padding: 0px 2px 0px 8px;
+
+}
+
+#custom-title {
+   color:#a6da95;
+   margin: 0px 2px 0px 0px;
+   padding: 0px 2px 0px 6px;
+   background-color: #3e4454;
+}
+
+#memory {
+    color:#f5a97f;
+}
+
+#cpu {
+    color:#ed8796;
+}
+
+#backlight {
+    color:#f4dbd6;
+}
+
+#pulseaudio {
+    color:#f5bde6;
+}
+
+#battery {
+    color:#c6a0f6;
+}
+
+#clock {
+    color:#a6da95;
+}
+#custom-indicator {
+  margin: 1px 0px 0px 0px;
+}
+#window {
+  margin: 2px 0px 0px 0px;
+  font-size: 14px;
+}
+
+#workspaces {
+  margin: 1px 3px 0px 3px;
+}
+
+#workspaces button {
+	padding: 0px 8px 0px 8px; 
+ 	min-width: 0px;
+	color: #888888;
+}
+
+#workspaces button.current_output {
+	padding: 0px 8px 0px 8px; 
+ 	min-width: 0px;
+	color: #a6da95;
+}
+
+#workspaces button.active { 
+	padding: 0px 8px 0px 8px; 
+	color: #3e4454;
+}
+
+#workspaces button.focused { 
+	padding: 0px 8px 0px 8px; 
+	color: #ffffff;
+}
+
+
+#window {
+	 color: #ffffff;
+     padding: 0px 10px 0px 10px;
+}
+
+
+window#waybar.empty #window {
+	background-color: transparent;
+	color: transparent;
+}
+
+
+window#waybar.empty {
+	background-color: #24273a;
+}
+
+
+#network, #temperature, #backlight, #pulseaudio, #battery, #cpu, #clock, #memory {
+    margin: 1px 8px 0px 8px;
+}
+
+#clock {
+}
+
+#tray{
+   padding: 0px 8px 0px 5px;
+   margin: 0px 0px 0px 0px;
+}
+
+
+#battery.critical {
+   color: #ff5555;
+}
+
+
+#network.disconnected {
+    color: #ff5555;
+}
