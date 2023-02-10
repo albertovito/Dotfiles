@@ -19,7 +19,7 @@ set $menu wofi --show drun -I
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /home/alberto/Immagini/Rullino/270473211febf3b87b72fb66fb306db9.jpg fill
+output * bg /home/alberto/Immagini/Rullino/leaves_line_neon_139772_2560x1600.jpg fill
 
 #
 # Example configuration:
