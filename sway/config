@@ -1,35 +1,28 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
+# Autotiling
 exec --no-startup-id autotiling
 
 ### Variables
-#
+
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
+
 # Your preferred terminal emulator
 set $term kitty
-# Your preferred application launcher
-# Note: pass the final command to swaymsg so that the resulting window can be opened
-# on the original workspace that the command was run on.
+
+# Your preferred menu launcher
 set $menu wofi --show drun -I
 
 ### Output configuration
-#
+
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg /home/alberto/Immagini/Rullino/leaves_line_neon_139772_2560x1600.jpg fill
 
-#
-# Example configuration:
-#
-#!/usr/bin/bash
-   output eDP-1 resolution 1920x1080 position 0,0
-   output HDMI-A-1 resolution 1920x1080 position 1920,0
-   bindswitch --reload --locked lid:on output eDP-1 disable
-   bindswitch --reload --locked lid:off output eDP-1 enable
-   exec_always /home/alberto/.config/sway/lid-close.sh
+# Monitor setup
+output eDP-1 resolution 1920x1080 position 0,0
+output HDMI-A-1 resolution 1920x1080 position 1920,0
+bindswitch --reload --locked lid:on output eDP-1 disable
+bindswitch --reload --locked lid:off output eDP-1 enable
+exec_always /home/alberto/.config/sway/lid-close.sh
 
 # workspace to displays
 workspace 1 output HDMI-A-1
@@ -39,177 +32,147 @@ workspace 4 output eDP-1
 workspace 5 output eDP-1
 workspace 6 output eDP-1
 
-
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
- default_border pixel 2
- gaps inner 10
- gaps outer 10
+# Boredrs
+default_border pixel 2
+gaps inner 10
+gaps outer 10
 
 ### Input configuration
-#
-# Example configuration:
-#
-   input type:touchpad {
+
+input type:touchpad {
        dwt enabled
        tap enabled
        natural_scroll enabled
        middle_emulation enabled
    }
 
-  input * {
+input * {
    xkb_layout it
    xkb_numlock enabled
   }
+
 ### Key bindings
-#
-# Basics:
-#
-    # Start a terminal
-    bindsym $mod+Return exec $term
 
-    # Kill focused window
-    bindsym $mod+q kill
+# Start a terminal
+bindsym $mod+Return exec $term
 
-    # Start your launcher
-    bindsym $mod+space exec $menu
+# Kill focused window
+bindsym $mod+q kill
+
+# Start your launcher
+bindsym $mod+space exec $menu
     
-    # Take a screenshot
-    bindsym print exec /home/alberto/scripts/screenshot.sh 
-    bindsym $mod+print exec wl-color-picker
+# Take a screenshot
+bindsym print exec /home/alberto/scripts/screenshot.sh 
+bindsym $mod+print exec wl-color-picker
 
-    # Start Apps
-    bindsym $mod+b exec brave
-    bindsym $mod+f exec kitty ranger
-    bindsym $mod+n exec kitty nvim
+# Start Apps
+bindsym $mod+b exec brave
+bindsym $mod+f exec kitty ranger
+bindsym $mod+n exec kitty nvim
 
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
-    floating_modifier $mod normal
+# Float
+floating_modifier $mod normal
 
-    # Reload the configuration file
-    bindsym $mod+Shift+r reload
+# Reload the configuration file
+bindsym $mod+Shift+r reload
 
-    # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec wlogout -b 4 -c 40 -m 450
-#
-# Moving around:
-#
-    # Move your focus around
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
+# Exit sway (logs you out of your Wayland session)
+bindsym $mod+Shift+e exec wlogout -b 4 -c 40 -m 450
 
-    # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
-#
-# Workspaces:
-#
-    # Switch to workspace
-    bindsym Ctrl+Right workspace next
-    bindsym Ctrl+Left workspace prev
-    bindsym $mod+1 workspace number 1
-    bindsym $mod+2 workspace number 2
-    bindsym $mod+3 workspace number 3
-    bindsym $mod+4 workspace number 4
-    bindsym $mod+5 workspace number 5
-    bindsym $mod+6 workspace number 6
-    bindsym $mod+7 workspace number 7
-    bindsym $mod+8 workspace number 8
-    bindsym $mod+9 workspace number 9
-    bindsym $mod+0 workspace number 10
-    # Move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace number 1
-    bindsym $mod+Shift+2 move container to workspace number 2
-    bindsym $mod+Shift+3 move container to workspace number 3
-    bindsym $mod+Shift+4 move container to workspace number 4
-    bindsym $mod+Shift+5 move container to workspace number 5
-    bindsym $mod+Shift+6 move container to workspace number 6
-    bindsym $mod+Shift+7 move container to workspace number 7
-    bindsym $mod+Shift+8 move container to workspace number 8
-    bindsym $mod+Shift+9 move container to workspace number 9
-    bindsym $mod+Shift+0 move container to workspace number 10
-    # Note: workspaces can have any name you want, not just numbers.
-    # We just use 1-10 as the default.
+# Move your focus around
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
 
-    #control options
-    bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-    bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-    bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-    bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
-    bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
-    bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
-    bindsym XF86AudioPlay exec playerctl play-pause
-    bindsym XF86AudioNext exec playerctl next
-    bindsym XF86AudioPrev exec playerctl previous
-#
+# Move the focused window with the same, but add Shift
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Switch to workspace
+bindsym Ctrl+Right workspace next
+bindsym Ctrl+Left workspace prev
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+# control options
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
 # Layout stuff:
-#
-    
-    # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
+   
+# Switch the current container between different layout styles
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
 
-    # Make the current focus fullscreen
-    bindsym $mod+Shift+f fullscreen
+# Make the current focus fullscreen
+bindsym $mod+Shift+f fullscreen
 
-    # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+# Toggle the current focus between tiling and floating mode
+bindsym $mod+Shift+space floating toggle
 
-    # Swap focus between the tiling area and the floating area
-    bindsym $mod+d focus mode_toggle
+# Swap focus between the tiling area and the floating area
+bindsym $mod+d focus mode_toggle
 
-    # Move focus to the parent container
-    bindsym $mod+a focus parent
-#
-# Scratchpad:
-#
-    # Sway has a "scratchpad", which is a bag of holding for windows.
-    # You can send windows there and get them back later.
+# Move focus to the parent container
+bindsym $mod+a focus parent
 
-    # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
 
-    # Show the next scratchpad window or hide the focused scratchpad window.
-    # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
-#
 # Resizing containers:
-#
+
 mode "resize" {
-    # left will shrink the containers width
-    # right will grow the containers width
-    # up will shrink the containers height
-    # down will grow the containers height
     
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
+ bindsym Left resize shrink width 10px
+ bindsym Down resize grow height 10px
+ bindsym Up resize shrink height 10px
+ bindsym Right resize grow width 10px
 
-    # Return to default mode
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+ # Return to default mode
+ bindsym Return mode "default"
+ bindsym Escape mode "default"
+
 }
-    bindsym $mod+r mode "resize"
 
-#
-# Status Bar:
-#
-### Colors
+bindsym $mod+r mode "resize"
+
+# Colors:
   # Class                   Border      BG       Text      Indicator   Child border
   client.focused            #b4bdfe   #1d1f21   #ffffff     #b4bdfe     #b4bdfe
   client.unfocused          #1d1f21   #1d1f21   #ffffff     #000000     #1d1f21
   client.focused_inactive   #c5c8c6   #1d1f21   #ffffff     #000000     #000000
 include /etc/sway/config.d/*
+
 #preferred bar
 bar {
 
