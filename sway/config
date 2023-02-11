@@ -78,8 +78,8 @@ workspace 6 output eDP-1
     bindsym print exec /home/alberto/scripts/screenshot.sh 
     bindsym $mod+print exec wl-color-picker
 
-    # Start Firefox
-    bindsym $mod+b exec firefox
+    # Start Apps
+    bindsym $mod+b exec brave
     bindsym $mod+f exec kitty ranger
     bindsym $mod+n exec kitty nvim
 
@@ -113,8 +113,6 @@ workspace 6 output eDP-1
 # Workspaces:
 #
     # Switch to workspace
-    bindgesture swipe:right workspace prev
-    bindgesture swipe:left workspace next
     bindsym Ctrl+Right workspace next
     bindsym Ctrl+Left workspace prev
     bindsym $mod+1 workspace number 1
