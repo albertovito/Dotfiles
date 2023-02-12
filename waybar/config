@@ -6,7 +6,7 @@
 
     "modules-left": [ "custom/title", "sway/workspaces","custom/indicator","sway/window"],
     "modules-center": [],
-    "modules-right": ["tray", "backlight", "pulseaudio", "battery", "cpu", "network", "clock", "custom/power"],
+    "modules-right": ["tray", "backlight", "pulseaudio", "battery", "cpu", "memory", "network", "clock", "custom/power"],
 
 
 	
