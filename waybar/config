@@ -84,9 +84,10 @@
     "network": {
         "interface": "wlan0", 
         "format-wifi": "󰤨 {signalStrength}%",
+        "format-ethernet": "󰈀 {ipaddr}/{cidr}",
         "tooltip-format": "{essid}",
-        "on-click": "/home/alberto/scripts/wofi-wifi.sh", 
-        "format-disconnected": "󰤮 ",
+        "on-click": "/home/alberto/scripts/nmcli-wofi.sh", 
+        "format-disconnected": "󰞃 ",
         "interval": 60
 },
 
