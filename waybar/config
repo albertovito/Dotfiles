@@ -81,12 +81,11 @@
 	"format": " {used}G",
 	"max-length": 10
 },
-    "network": {
-        "interface": "wlan0", 
+    "network": { 
         "format-wifi": "󰤨 {signalStrength}%",
-        "format-ethernet": "󰈀 {ipaddr}/{cidr}",
+        "format-ethernet": "󰈀 {ipaddr}",
         "tooltip-format": "{essid}",
-        "on-click": "/home/alberto/scripts/nmcli-wofi.sh", 
+        "on-click": "kitty nmtui", 
         "format-disconnected": "󰞃 ",
         "interval": 60
 },
