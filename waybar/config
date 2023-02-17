@@ -1,7 +1,7 @@
 {
 	"layer": "top",	
 	"position": "top",
-    "height": 26,
+    "height": 24,
 
 
     "modules-left": [ "custom/title", "sway/workspaces","custom/indicator","sway/window"],
@@ -42,7 +42,7 @@
 },
 
     "tray": {
-        "icon-size": 20,
+        "icon-size": 18,
         "spacing": 10
 },
 
@@ -85,7 +85,7 @@
         "format-wifi": "󰤨 {signalStrength}%",
         "format-ethernet": "󰈀 {ipaddr}",
         "tooltip-format": "{essid}",
-        "on-click": "kitty nmtui", 
+        "on-click": "/home/alberto/scripts/nmcli-wofi.sh", 
         "format-disconnected": "󰞃 ",
         "interval": 60
 },

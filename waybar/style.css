@@ -1,6 +1,6 @@
 * {
     font-family: "JetBrainsMono Nerd Font";
-    font-size: 15px;
+    font-size: 14px;
 }
 
 
@@ -65,12 +65,12 @@ window#waybar {
   margin: 1px 0px 0px 0px;
 }
 #window {
-  margin: 2px 0px 0px 0px;
-  font-size: 14px;
+  margin: 0px 0px 0px 1px;
+  font-size: 13px;
 }
 
 #workspaces {
-  margin: 1px 3px 0px 3px;
+  margin: 0px 3px 0px 3px;
 }
 
 #workspaces button {
