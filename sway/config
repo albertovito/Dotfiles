@@ -15,7 +15,7 @@ set $menu wofi --show drun -I
 ### Output configuration
 
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /home/alberto/Immagini/Rullino/wallhaven-z8dg9y.png fill
+output * bg /home/alberto/Immagini/Rullino/leaves_line_neon_139772_2560x1600.jpg fill
 
 # Monitor setup
 output eDP-1 resolution 1920x1080 position 0,0

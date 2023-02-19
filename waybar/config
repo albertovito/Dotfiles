@@ -4,7 +4,7 @@
     "height": 24,
 
 
-    "modules-left": [ "custom/title", "sway/workspaces", "sway/window"],
+    "modules-left": [ "custom/title", "sway/workspaces", "custom/indicator", "sway/window"],
     "modules-center": [],
     "modules-right": ["tray", "backlight", "pulseaudio", "battery", "cpu", "memory", "network", "clock", "custom/power"],
 
@@ -22,17 +22,17 @@
     },
 },	  
    "custom/indicator": {
-        "format": "[]=",
+        "format": " ",
 
 },
 
   "custom/title": {
-        "format": " ", 
+        "format": "󰒋", 
         "on-click": "kitty btop"
 },
 
    "sway/window": {
-    "format": "{title}",
+    "format": "{app_id}",
     "max-length": 50,
 },
 

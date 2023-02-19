@@ -1,22 +1,21 @@
 * {
     font-family: "JetBrainsMono Nerd Font";
     font-size: 14px;
+    border-radius: 0px;
 }
 
 
 window#waybar { 
-    background-color: #191728; 
+    background-color: #1E1E2E; 
     color: #ffffff;    
 }
 
 
 .modules-left {
-	background-color: #39334F;
 }
 
 
 .modules-right {
-	background-color: #39334F;
 	padding: 0px 0px 0px 0px;
 }
 
@@ -30,8 +29,9 @@ window#waybar {
 }
 
 #custom-title {
-   color:#a6da95;
-   margin: 0px 0px 0px 6px;
+   font-size: 15px;
+   color: #91d7e3;
+   margin: 0px 8px 0px 8px;
 }
 
 #memory {
@@ -57,39 +57,40 @@ window#waybar {
 #clock {
     color:#a6da95;
 }
+
 #custom-indicator {
-  margin: 1px 0px 0px 0px;
-}
+  margin: 1px 0px 0px 4px;
+  color: #91d7e3;
+ }
+
 #window {
-  margin: 0px 0px 0px 1px;
-  background-color: #191728;
-  font-size: 13px;
+  margin: 0px 0px 0px 0px;
+  font-size: 14px;
 }
 
 #workspaces {
-  margin: 0px 2px 0px 2px;
+  margin: 0px 5px 0px 5px;
 }
 
 #workspaces button {
-	padding: 0px 8px 0px 8px; 
+	padding: 0px 5px 0px 5px; 
  	min-width: 0px;
 	color: #888888;
 }
 
 #workspaces button.current_output {
-	padding: 0px 8px 0px 8px; 
  	min-width: 0px;
-	color: #a6da95;
+	color: #ffffff;
 }
 
 #workspaces button.active { 
-	padding: 0px 8px 0px 8px; 
 	color: #3e4454;
 }
 
 #workspaces button.focused { 
-	padding: 0px 8px 0px 8px; 
-	color: #ffffff;
+	color: #1E1E2E;
+	padding: 0px 5px 0px 5px; 
+    background-color: #B5E8E0;
 }
 
 
@@ -100,13 +101,11 @@ window#waybar {
 
 
 window#waybar.empty #window {
-	background-color: #191728;
 	color: transparent;
 }
 
 
 window#waybar.empty {
-	background-color: #191728;
 }
 
 
