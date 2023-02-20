@@ -64,7 +64,7 @@ window#waybar {
  }
 
 #window {
-  margin: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 8px;
   font-size: 14px;
 }
 
@@ -92,13 +92,6 @@ window#waybar {
 	padding: 0px 5px 0px 5px; 
     background-color: #B5E8E0;
 }
-
-
-#window {
-	 color: #ffffff;
-     padding: 0px 10px 0px 10px;
-}
-
 
 window#waybar.empty #window {
 	color: transparent;

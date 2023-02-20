@@ -1,15 +1,14 @@
 {
 	"layer": "top",	
 	"position": "top",
-    "height": 24,
+    "height": 26,
 
 
     "modules-left": [ "custom/title", "sway/workspaces", "custom/indicator", "sway/window"],
     "modules-center": [],
     "modules-right": ["tray", "backlight", "pulseaudio", "battery", "cpu", "memory", "network", "clock", "custom/power"],
 
-
-	
+  	
    "sway/workspaces":{
     "persistent_workspaces":{
      "1":"[]",
@@ -42,7 +41,7 @@
 },
 
     "tray": {
-        "icon-size": 18,
+        "icon-size": 14,
         "spacing": 10
 },
 
