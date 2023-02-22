@@ -1,3 +1,5 @@
+@import "mocha.css";
+
 * {
     font-family: "JetBrainsMono Nerd Font";
     font-size: 14px;
@@ -6,7 +8,7 @@
 
 
 window#waybar { 
-    background-color: #1E1E2E; 
+    background-color: @base; 
     color: #ffffff;    
 }
 
@@ -20,47 +22,47 @@ window#waybar {
 }
 
 #network {
-    color:#eed49f;
+    color: @yellow;
 }
 #custom-power {
-    color:#f5a97f;
+    color: @red;
     margin: 0px 4px 0px 4px;
 
 }
 
 #custom-title {
    font-size: 16px;
-   color: #91d7e3;
+   color: @teal;
    margin: 0px 8px 0px 8px;
 }
 
 #memory {
-    color:#f5a97f;
+    color:@peach;
 }
 
 #cpu {
-    color:#ed8796;
+    color:@red;
 }
 
 #backlight {
-    color:#f4dbd6;
+    color:@rosewater;
 }
 
 #pulseaudio {
-    color:#f5bde6;
+    color:@pink;
 }
 
 #battery {
-    color:#c6a0f6;
+    color:@mauve;
 }
 
 #clock {
-    color:#a6da95;
+    color:@green;
 }
 
 #custom-indicator {
   margin: 1px 0px 0px 4px;
-  color: #91d7e3;
+  color: @sky;
  }
 
 #window {
@@ -75,7 +77,7 @@ window#waybar {
 #workspaces button {
 	padding: 0px 5px 0px 5px; 
  	min-width: 0px;
-	color: #888888;
+	color: @overlay0;
 }
 
 #workspaces button.current_output {
@@ -84,13 +86,13 @@ window#waybar {
 }
 
 #workspaces button.active { 
-	color: #3e4454;
+	color: @surface0;
 }
 
 #workspaces button.focused { 
-	color: #1E1E2E;
+	color: @base;
 	padding: 0px 5px 0px 5px; 
-    background-color: #B5E8E0;
+    background-color: @teal;
 }
 
 window#waybar.empty #window {
@@ -115,10 +117,10 @@ window#waybar.empty {
 
 
 #battery.critical {
-   color: #ff5555;
+   color: @red;
 }
 
 
 #network.disconnected {
-    color: #ff5555;
+    color: @red;
 }
