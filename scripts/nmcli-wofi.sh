@@ -1,169 +1,97 @@
 #!/usr/bin/env bash
+# Connect to WIFI
+# Modified from https://github.com/zbaylin/rofi-wifi-menu/blob/master/rofi-wifi-menu.sh
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+# Starts a scan of available broadcasting SSIDs
+# nmcli dev wifi rescan
 
-# default config
-FIELDS="SSID,SECURITY,BARS"
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# supported locales (en, ru, de, fr, hi, ja)
-declare -A LOC_ENABLE=(["en"]="enabled" ["ru"]="включен" ["de"]="aktiviert" ["fr"]="activé" ["hi"]="सक्षम" ["ja"]="有効")
-declare -A LOC_ACTIVE=(["en"]="yes" ["de"]="ja")
-declare -A LOC_INACTIVE=(["en"]="no" ["de"]="nein")
+# FIELDS=SSID,SECURITY,BARS,ACTIVE
+FIELDS=SSID,BARS,ACTIVE,SECURITY
+POSITION=0
+XOFF=-30
+LOC=3
+CACHE=~/.local/tmp/wifi-wofi
+WWIDTH=420
+WHEIGHT=420
+MAXHEIGHT=2000
 
-# get current locale
-CURRLOCALE=$(locale | grep 'LANG=[a-z]*' -o | sed 's/^LANG=//g')
-# 'enabled' in currnet locale
-ENABLED="${LOC_ENABLE["$CURRLOCALE"]}"
-ACTIVE="${LOC_ACTIVE["$CURRLOCALE"]}"
-INACTIVE="${LOC_INACTIVE["$CURRLOCALE"]}"
-
-# get current uuid
-CURRUUID="$(nmcli -f UUID,TYPE con show --active | grep wifi | awk '{print $1}')"
-
-# get wifi state
-function wifistate () {
-  echo "$(nmcli -fields WIFI g | sed -n 2p)"
-}
-
-# get active wifi connections
-function wifiactive () {
-  echo "$(nmcli con show --active | grep wifi)"
-}
-
-function if_wifistate () {
-  # return a expression based on wifi state
-  [[ "$(wifistate)" =~ $ENABLED ]] && rt=$1 || rt=$2
-  echo $rt
-}
-
-function toggle_wifi () {
-  toggle=$(if_wifistate "Disable Network" "Enable Network")
-  echo $toggle
-}
-
-function current_connection () {
-  currssid=$(iwgetid -r)
-  [[ "$currssid" != '' ]] && currcon="Disconnect from \"$currssid\"" || currcon=""
-  echo $currcon
-}
-
-function wifi_list () {
-  # get list of available connections without the active connection (if it's connected)
-  nmcli --fields IN-USE,"$FIELDS" device wifi list | sed "s/^IN-USE\s//g" | awk '{ if ($1 != "*") { print } }' | sed 's/^ *//g'
-}
+LIST=$(nmcli --fields "$FIELDS" device wifi list | sed '/^--/d' | \
+  awk -F "[  ]{2,}" '/SSID/ {next} {;
+      sub(/yes/, "", $3);
+      sub(/no/, "", $3);
+      if ($4 == "--") $4=""; else $4="";
+      printf "<tt>%-4s  %-26s </tt>%s   %s\n", $2,$1,$3,$4 }')
 
 
-function menu () {
-  wa=$(wifiactive); ws=$(wifistate);
-  if [[ $ws =~ $ENABLED ]]; then
-    if [[ "$wa" != '' ]]; then
-        echo "$1\n\n$4\n\n$2\n$3\nManual Connection"
-    else
-        echo "$1\n\n$4\n\n$3\nManual Connection"
-    fi
-  else
-    echo "$4\n\n$3"
-  fi
-}
+# Gives a list of known connections so we can parse it later
+KNOWNCON=$(nmcli connection show | awk -F '[[:space:]][[:space:]]+' '{printf "%s\n", $1}')
 
-function rofi_cmd () {
-  # don't repeat lines with uniq -u
-  echo -e "$1" | uniq -u | wofi --show dmenu --insensitive -p "Network connection" --style "$DIR/wofi-font.css" --cache /dev/null
-}
+# Really janky way of telling if there is currently a connection
+CONSTATE=$(nmcli -fields WIFI g | awk '/enabled|disabled/ { print $0}')
 
-function rofi_menu () {
-    TOGGLE=$(toggle_wifi)
-    CURRCONNECT=$(current_connection)
-    [[ "$TOGGLE" =~ 'Enable' ]] && WIFILIST="" || WIFILIST=$(wifi_list)""
+CURRSSID=$(LANGUAGE=C nmcli -t -f active,ssid dev wifi | awk -F: '$1 ~ /^yes/ {print $2}')
 
-    MENU=$(menu "$WIFILIST" "$CURRCONNECT" "$TOGGLE")
+if [[ ! -z $CURRSSID ]]; then
+	HIGHLINE=$(echo  "$(echo "$LIST" | awk -F "[  ]{2,}" '{print $2}' | grep -Fxn -m 1 "$CURRSSID" | awk -F ":" '{print $1}') + 1" | bc )
+fi
 
-    rofi_cmd "$MENU"
-}
+LINENUM=$(echo -e "toggle\nmanual\n${LISTB}\n${LIST}" | wc -l)
 
-function get_ssid () {
-    # get fields in order
-    eval FIELDSARR=( $( echo "$FIELDS" | sed 's/,/ /g' ) )
+# If there are more than 20 SSIDs, the menu will still only have 20 lines
+if [ "$LINENUM" -gt 20 ] && [[ "$CONSTATE" =~ "enabled" ]]; then
+	LINENUM=20
+elif [[ "$CONSTATE" =~ "disabled" ]]; then
+	LINENUM=1
+fi
 
-    # get position of SSID field
-    for i in "${!FIELDSARR[@]}"; do
-      if [[ "${FIELDSARR[$i]}" = "SSID" ]]; then
-          SSID_POS="${i}";
-      fi
-    done
 
-    # let for arithmetical vars
-    let AWKSSIDPOS=$SSID_POS+1
+if [[ "$CONSTATE" =~ "enabled" ]]; then
+	TOGGLE="toggle off"
+elif [[ "$CONSTATE" =~ "disabled" ]]; then
+	TOGGLE="toggle on"
+fi
 
-    # get SSID from AWKSSIDPOS
-    CHSSID=$(echo "$1" | sed  's/\s\{2,\}/\|/g' | awk -F "|" '{print $'$AWKSSIDPOS'}')
-    echo "$CHSSID"
-}
+CHENTRY=$(echo -e "$TOGGLE\nmanual\n$LISTB\n$LIST" | uniq -u | \
+    wofi -i --dmenu -p "Wi-Fi SSID: " --width "$WWIDTH" --lines ${LINENUM} --cache-file /dev/null --location $LOC --xoffset $XOFF | awk -F "[  ]{2,}" '{gsub(/<[^>]*>/, ""); print $0}')
 
-function cleanup_networks () {
-  nmcli --fields UUID,TIMESTAMP-REAL,DEVICE con show | grep -e '--' |  awk '{print $1}' \
-    | while read line; do nmcli con delete uuid $line; done
-}
 
-function main () {
-    OPS=$(rofi_menu)
-    CHSSID=$(get_ssid "$OPS")
+CHSSID=$(echo "$CHENTRY" | awk -F "[  ]{2,}" '{print $2}')
 
-    if [ -z "$OPS" ]; then
-      exit 0
-    fi
+# If the user inputs "manual" as their SSID in the start window, it will bring them to this screen
+if [ "$CHENTRY" = "manual" ] ; then
+	# Manual entry of the SSID and password (if appplicable)
+	MSSID=$(echo "enter the SSID of the network (SSID,password)" | wofi --dmenu -p "Manual Entry: ")
+	# Separating the password from the entered string
+	MPASS=$(echo "$MSSID" | awk -F "," '{print $2}')
 
-    if [[ "$OPS" =~ 'Disable' ]]; then
-      nmcli radio wifi off
+	# If the user entered a manual password, then use the password nmcli command
+	if [ "$MPASS" = "" ]; then
+		nmcli dev wifi con "$MSSID"
+	else
+		nmcli dev wifi con "$MSSID" password "$MPASS"
+	fi
 
-    elif [[ "$OPS" =~ 'Enable' ]]; then
-      nmcli radio wifi on
+elif [ "$CHENTRY" = "toggle on" ]; then
+	nmcli radio wifi on
 
-    elif [[ "$OPS" =~ 'Disconnect' ]]; then
-      nmcli con down uuid $CURRUUID
+elif [ "$CHENTRY" = "toggle off" ]; then
+	nmcli radio wifi off
 
-    elif [[ "$OPS" =~ 'Manual' ]]; then
-      # Manual entry of the SSID
-      MSSID=$(echo -en "" | rofi -dmenu -p "SSID" -mesg "Enter the SSID of the network" \
-        -lines 0 -font "$FONT")
+else
 
-      # manual entry of the PASSWORD
-      MPASS=$(echo -en "" | rofi -dmenu -password -p "PASSWORD" -mesg \
-        "Enter the PASSWORD of the network" -lines 0 -font "$FONT")
+	# If the connection is already in use, then this will still be able to get the SSID
+	if [ "$CHSSID" = "*" ]; then
+		CHSSID=$(echo "$CHENTRY" | sed  's/\s\{2,\}/\|/g' | awk -F "|" '{print $3}')
+	fi
 
-      # If the user entered a manual password, then use the password nmcli command
-      if [ "$MPASS" = "" ]; then
-        nmcli dev wifi con "$MSSID"
-      elif [ "$MSSID" != '' ] && [ "$MPASS" != '' ]; then
-        nmcli dev wifi con "$MSSID" password "$MPASS"
-      fi
+	# Parses the list of preconfigured connections to see if it already contains the chosen SSID. This speeds up the connection process
 
-    else
-      CHSSID=$(get_ssid "$OPS")
+	if [[ $(echo "$KNOWNCON" | grep -w "$CHSSID") = "$CHSSID" ]]; then
+		nmcli con up "$CHSSID"
+	else
+		nmcli dev wifi con "$CHSSID"
+	fi
 
-      # Check if password exists
-      if nmcli connection | grep -q "$CHSSID"; then
-          nmcli connection up "$CHSSID"
-      else
-        if [[ "$OPS" =~ "WPA2" ]] || [[ "$OPS" =~ "WEP" ]]; then
-          WIFIPASS=$(echo -en "" | wofi --show dmenu --password -p "PASSWORD" --lines=0)
-          if [ -z "$WIFIPASS" ]; then
-            exit 0
-          fi
-        fi
-
-        if [[ "$CHSSID" != '' ]]; then
-          if [[ "$WIFIPASS" != '' ]]; then
-            nmcli dev wifi con "$CHSSID" password "$WIFIPASS"
-          else
-            nmcli dev wifi con "$CHSSID"
-          fi
-        fi
-      fi
-    fi
-}
-
-# clean up obsoleted connections
-# nmcli --fields UUID,TIMESTAMP-REAL,DEVICE con show | grep never |  awk '{print $1}' | while read line; do nmcli con delete uuid $line; done
-
-main
+fi

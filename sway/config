@@ -15,7 +15,7 @@ set $menu wofi --show drun -I
 ### Output configuration
 
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /home/alberto/Immagini/Rullino/leaves_line_neon_139772_2560x1600.jpg fill
+output * bg /home/alberto/Immagini/Rullino/andreas-m-ykfjtb0kphU.jpg fill
 
 # Monitor setup
 output eDP-1 resolution 1920x1080 position 0,0
@@ -25,7 +25,6 @@ bindswitch --reload --locked lid:off output eDP-1 enable
 exec_always /home/alberto/.config/sway/lid-close.sh
 
 # workspace to displays
-workspace 1 output HDMI-A-1
 workspace 2 output HDMI-A-1
 workspace 3 output HDMI-A-1
 workspace 4 output eDP-1
@@ -173,4 +172,6 @@ swaybar_command waybar
 
 #Autostart applications
 exec /home/alberto/scripts/lxsession.sh
-exec udiskie -ant  
+exec udiskie -ant 
+exec blueman-applet
+exec nextcloud

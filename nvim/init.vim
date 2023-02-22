@@ -12,7 +12,10 @@ let g:startify_lists = [
           \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
           \ ]
 
-let g:airline_theme='deus'
+let g:Hexokinase_highlighters = ['backgroundfull']
+let g:airline_theme = 'catppuccin_mocha'
+colorscheme catppuccin_mocha
+
 " Set global clipboard
 set clipboard+=unnamedplus
 
@@ -46,6 +49,7 @@ set ruler
 
 " Enable syntax highlighting
 syntax enable
+set termguicolors
 
 " Always show the status line
 set laststatus=2
@@ -60,9 +64,9 @@ let &t_EI = "\e[2 q"
 
 " Cursorlie 
 set cursorline
-hi CursorLine cterm=bold  
+hi CursorLine gui=bold guibg=none 
 hi clear LineNr
-hi CursorLineNr cterm=bold  ctermbg=darkgrey ctermfg=white
+hi CursorLineNr gui=bold guibg=none guifg=#ffffff
 
 
 " Map auto complete of (, ", ', [,<
@@ -90,7 +94,8 @@ Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'romgrk/barbar.nvim'
-
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
 call plug#end()
 

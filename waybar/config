@@ -26,7 +26,7 @@
 },
 
   "custom/title": {
-        "format": "󰒋", 
+        "format": "", 
         "on-click": "kitty btop"
 },
 
@@ -37,7 +37,7 @@
 
     "custom/power": {
         "format": " ", 
-        "on-click": "wlogout -b 4 -c 40 -m 450 -p layer-shell"
+        "on-click": "/home/alberto/scripts/powermenu.sh"
 },
 
     "tray": {
