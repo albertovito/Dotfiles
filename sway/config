@@ -25,6 +25,7 @@ bindswitch --reload --locked lid:off output eDP-1 enable
 exec_always /home/alberto/.config/sway/lid-close.sh
 
 # workspace to displays
+workspace 1 output HDMI-A-1
 workspace 2 output HDMI-A-1
 workspace 3 output HDMI-A-1
 workspace 4 output eDP-1
@@ -126,10 +127,6 @@ bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
-
-# Brave history back and forward
-bindgesture swipe:right exec wtype -M alt -P Left -m ctrl -p Left
-bindgesture swipe:left exec wtype -M alt -P Right -m ctrl -p Right
 
 # Layout stuff:
    
