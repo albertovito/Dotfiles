@@ -155,7 +155,7 @@ bindsym $mod+r mode "resize"
 
 # Colors:
   # Class                   Border      BG       Text      Indicator   Child border
-  client.focused            #94e2d5   #1d1f21   #ffffff     #94e2d5     #94e2d5
+  client.focused            #a6e3a1   #1d1f21   #ffffff     #a6e3a1     #a6e3a1
   client.unfocused          #1d1f21   #1d1f21   #ffffff     #000000     #1d1f21
   client.focused_inactive   #c5c8c6   #1d1f21   #ffffff     #000000     #000000
 include /etc/sway/config.d/*
