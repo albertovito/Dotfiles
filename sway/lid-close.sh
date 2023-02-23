@@ -5,10 +5,4 @@ else
     swaymsg output eDP-1 disable
 fi
 
-HDMI_STATUS="$(cat /sys/class/drm/card0-HDMI-A-1/status)"
-
-if [ "${HDMI_STATUS}" = connected ]; then
- swaymsg workspace number 4
-else
- swaymsg workspace number 1
-fi
+swaymsg workspace number 1
