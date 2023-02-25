@@ -1,3 +1,6 @@
+"Neovim Config
+
+" Startify
 :let g:startify_custom_header = [
 \ ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
 \ ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
@@ -12,7 +15,15 @@ let g:startify_lists = [
           \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
           \ ]
 
+" Minimap
+let g:minimap_width = 10
+let g:minimap_auto_start = 1
+let g:minimap_auto_start_win_enter = 1
+
+" Colors
 let g:Hexokinase_highlighters = ['backgroundfull']
+
+" Colorscheme
 let g:airline_theme = 'catppuccin_mocha'
 colorscheme catppuccin_mocha
 
@@ -80,6 +91,7 @@ inoremap "  ""<esc>i
 " Compile
 nnoremap <F5> :!gcc % -o %< && ./%< && rm %< <CR>
 
+" Vim-Plug
 call plug#begin()
 
 Plug 'https://github.com/terryma/vim-multiple-cursors'
@@ -96,6 +108,7 @@ Plug 'nvim-tree/nvim-web-devicons'
 Plug 'romgrk/barbar.nvim'
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+Plug 'wfxr/minimap.vim'
 
 call plug#end()
 
