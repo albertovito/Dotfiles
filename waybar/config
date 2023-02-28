@@ -5,8 +5,8 @@
 
 
     "modules-left": [ "custom/title", "sway/workspaces", "custom/indicator", "sway/window"],
-    "modules-center": [],
-    "modules-right": ["tray", "backlight", "pulseaudio", "battery", "cpu", "memory", "network", "clock", "custom/power"],
+    "modules-center": ["clock"],
+    "modules-right": ["tray", "backlight", "pulseaudio", "battery", "cpu", "network", "custom/power"],
 
   	
    "sway/workspaces":{
@@ -47,9 +47,8 @@
 
 
     "clock": {
-        "format": "{: %R}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "interval": 30
+        "format": " {:%a-%d-%b %R}",
+        "tooltip-format": "<tt><big>{calendar}</big></tt>",
 },
 
     
