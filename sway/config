@@ -60,7 +60,7 @@ bindsym $mod+q kill
 
 # Start your launcher
 bindsym $mod+space exec $menu
-    
+
 # Take a screenshot
 bindsym print exec /home/alberto/scripts/screenshot.sh 
 bindsym $mod+print exec wl-color-picker

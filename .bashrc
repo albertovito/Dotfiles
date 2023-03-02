@@ -10,6 +10,7 @@ alias nextserver='ssh alberto@ubtsrv.ignorelist.com -p 5000'
 alias ls='ls --color=auto'
 alias bat='acpi -i'
 alias gitman='cd /home/alberto/Dotfiles/ && lazygit'
+alias todo='nvim todo.txt'
 
 # init
 # PS1='[\u@\h \W]\$ '
