@@ -23,6 +23,7 @@ output HDMI-A-1 resolution 1920x1080 position 1920,0
 bindswitch --reload --locked lid:on output eDP-1 disable
 bindswitch --reload --locked lid:off output eDP-1 enable
 exec_always /home/alberto/.config/sway/lid-close.sh
+exec_always "systemctl --user import-environment; systemctl --user start sway-session.target"
 
 # workspace to displays
 workspace 1 output HDMI-A-1
