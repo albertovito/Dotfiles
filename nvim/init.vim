@@ -13,8 +13,8 @@ let g:startify_lists = [
           \ ]
 
 let g:Hexokinase_highlighters = ['backgroundfull']
-let g:airline_theme = 'catppuccin_mocha'
-colorscheme catppuccin_mocha
+"let g:airline_theme = 'catppuccin_mocha'
+:colorscheme codedark
 
 " Set global clipboard
 set clipboard+=unnamedplus
@@ -96,6 +96,7 @@ Plug 'nvim-tree/nvim-web-devicons'
 Plug 'romgrk/barbar.nvim'
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+Plug 'tomasiser/vim-code-dark'
 
 call plug#end()
 
