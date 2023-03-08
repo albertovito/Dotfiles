@@ -74,7 +74,6 @@ inoremap <  <><esc>i
 inoremap (  ()<esc>i
 inoremap [  []<esc>i
 inoremap {  {}<esc>i
-inoremap '  ''<esc>i
 inoremap "  ""<esc>i
 
 " Compile
@@ -122,3 +121,4 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = '☰ '
 let g:airline_symbols.maxlinenr = ''
 let g:airline_symbols.dirty='⚡'
+
